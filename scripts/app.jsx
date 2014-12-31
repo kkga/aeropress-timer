@@ -3,6 +3,6 @@
 var React = require('react');
 window.React = React;
 
-var MyComponent = require('./components/mycomponent.jsx');
+var Timer = require('./components/Timer.jsx');
 
-React.render(<MyComponent />, document.getElementById('content'));
+React.render(<Timer />, document.getElementById('content'));
