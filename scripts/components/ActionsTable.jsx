@@ -24,14 +24,14 @@ var ActionsTable = React.createClass({
     var rows = [],
         seconds = this.props.seconds;
 
-    this.props.recipe[0].steps.forEach(function(step) {
+    this.props.recipe.steps.forEach(function(step) {
       rows.push(<StepRow step={step} seconds={seconds} />);
     });
 
     return (
       <table>
         <span>
-          {this.props.recipe[0].name}
+          {this.props.recipe.name}
         </span>
         <thead>
           <tr>
