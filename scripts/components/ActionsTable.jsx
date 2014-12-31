@@ -2,17 +2,16 @@
 
 var React = require('react');
 
-var RECIPE = [
-  {action: 'Pour Water', seconds: 30},
-  {action: 'Stir', seconds: 10},
-  {action: 'Steep', seconds: 30},
-  {action: 'Plunge', seconds: 30}
-];
-
-var ActionRow = React.createClass({
+var StepRow = React.createClass({
   render: function() {
+    var isActiveStep = this.props.seconds > this.props.step.seconds;
+
+    var rowStyle = {
+      backgroundColor: isActiveStep ? 'red' : 'skyblue'
+    };
+
     return (
-      <tr>
+      <tr style={rowStyle}>
         <td>{this.props.step.action}</td>
         <td>{this.props.step.seconds}</td>
       </tr>
@@ -22,15 +21,18 @@ var ActionRow = React.createClass({
 
 var ActionsTable = React.createClass({
   render: function() {
-    var rows = [];
-    var recipe = RECIPE;
+    var rows = [],
+        seconds = this.props.seconds;
 
-    recipe.forEach(function(step) {
-      rows.push(<ActionRow step={step} />);
+    this.props.recipe[0].steps.forEach(function(step) {
+      rows.push(<StepRow step={step} seconds={seconds} />);
     });
 
     return (
       <table>
+        <span>
+          {this.props.recipe[0].name}
+        </span>
         <thead>
           <tr>
             <th>Action</th>
