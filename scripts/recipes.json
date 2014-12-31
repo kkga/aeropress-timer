@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Stumptown",
+    "url": "http://stumptowncoffee.com/brew-guides/aeropress/",
+    "inverted": true,
+    "steps":
+      [
+        {
+          "action": "Pour Water",
+          "seconds": 30
+        },
+        {
+          "action": "Stir",
+          "seconds": 10
+        },
+        {
+          "action": "Steep",
+          "seconds": 30
+        },
+        {
+          "action": "Plunge",
+          "seconds": 30
+        }
+      ]
+  },
+]
