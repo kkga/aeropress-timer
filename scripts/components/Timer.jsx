@@ -7,14 +7,17 @@ var React = require('react'),
 
 var Timer = React.createClass({
   getInitialState: function() {
-    return {secondsElapsed: 0};
+    return { secondsElapsed: 0 };
   },
+
   tick: function() {
     this.setState({secondsElapsed: this.state.secondsElapsed + 1});
   },
+
   startCounter: function() {
     this.interval = setInterval(this.tick, 1000);
   },
+  
   stopCounter: function() {
     clearInterval(this.interval);
     this.setState({secondsElapsed: 0});
@@ -52,7 +55,8 @@ var Timer = React.createClass({
 
         <br />
 
-        <CurrentStep step={recipe.steps[0]} />
+        <CurrentStep recipe={recipe}
+                     secondsElapsed={this.state.secondsElapsed} />
       </div>
     );
   }

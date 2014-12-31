@@ -3,18 +3,36 @@
 var React = require('react');
 
 var CurrentStep = React.createClass({
+  getInitialState: function() {
+    return {
+      stepIndex: 0
+    };
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var recipe = this.props.recipe,
+        currentStep = recipe.steps[this.state.stepIndex];
+
+    this.setState({
+      stepIndex: nextProps.secondsElapsed >= currentStep.seconds ?
+                 this.state.stepIndex + 1 :
+                 this.state.stepIndex
+    });
+  },
+
   render: function() {
-    var isActiveStep = this.props.seconds > this.props.step.seconds;
+    var recipe = this.props.recipe,
+        currentStep = recipe.steps[this.state.stepIndex];
 
     var stepStyle = {
-      backgroundColor: isActiveStep ? 'red' : 'skyblue'
+      backgroundColor: 'skyblue'
     };
 
     return (
       <div style={stepStyle}>
-        <span>{this.props.step.action}</span>
+        <span>{currentStep.action}</span>
         {' '}
-        <span>{this.props.step.seconds}</span>
+        <span>{currentStep.seconds}</span>
       </div>
     );
   }
