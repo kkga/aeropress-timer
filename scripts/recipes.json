@@ -7,19 +7,19 @@
       [
         {
           "action": "Pour Water",
-          "seconds": 3
+          "duration": 3
         },
         {
           "action": "Stir",
-          "seconds": 5
+          "duration": 5
         },
         {
           "action": "Steep",
-          "seconds": 7
+          "duration": 7
         },
         {
           "action": "Plunge",
-          "seconds": 10
+          "duration": 10
         }
       ]
   },
