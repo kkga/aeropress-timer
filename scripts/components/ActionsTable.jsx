@@ -4,14 +4,8 @@ var React = require('react');
 
 var StepRow = React.createClass({
   render: function() {
-    var isActiveStep = this.props.seconds > this.props.step.seconds;
-
-    var rowStyle = {
-      backgroundColor: isActiveStep ? 'red' : 'skyblue'
-    };
-
     return (
-      <tr style={rowStyle}>
+      <tr>
         <td>{this.props.step.action}</td>
         <td>{this.props.step.seconds}</td>
       </tr>

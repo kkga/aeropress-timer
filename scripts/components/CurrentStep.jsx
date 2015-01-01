@@ -11,10 +11,10 @@ var CurrentStep = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     var recipe = this.props.recipe,
-        currentStep = recipe.steps[this.state.stepIndex];
+        step = recipe.steps[this.state.stepIndex];
 
     this.setState({
-      stepIndex: nextProps.secondsElapsed >= currentStep.seconds ?
+      stepIndex: nextProps.secondsElapsed >= step.seconds ?
                  this.state.stepIndex + 1 :
                  this.state.stepIndex
     });
