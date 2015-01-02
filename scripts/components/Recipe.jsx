@@ -1,6 +1,5 @@
 var React = require('react'),
-    StepsList = require('./StepsList.jsx'),
-    Step = require('./Step.jsx'),
+    Timer = require('./Timer.jsx'),
     RECIPES = require('../recipes.json');
 
 var Recipe = React.createClass({
@@ -27,14 +26,13 @@ var Recipe = React.createClass({
         <h4>{recipe.name}</h4>
         {isInverted && <small>Inverted</small>}
 
-        <br /><br />
-
-        <StepsList steps={steps} />
         <p>
           Steps: {totalSteps}
           <br />
           Duration: {totalDuration}s
         </p>
+
+        <Timer steps={steps} />
       </div>
     );
   }
