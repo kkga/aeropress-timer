@@ -4,58 +4,72 @@ var React = require('react'),
 var StepsList = React.createClass({
   getInitialState: function() {
     return {
-      activeStepIndex: 0,
-      secondsElapsed: 0
+      activeStepIndex: null,
+      secondsElapsed: 0,
+      isTimerActive: false
     };
   },
 
   tick: function() {
+    var steps = this.props.steps,
+        activeStepIndex = this.state.activeStepIndex,
+        activeStepDuration = steps[activeStepIndex].duration,
+        secondsElapsed = this.state.secondsElapsed;
+
     this.setState({secondsElapsed: this.state.secondsElapsed + 1});
 
-    if (this.props.steps[this.state.activeStepIndex].duration < this.state.secondsElapsed) {
-      this.setState({activeStepIndex: this.state.activeStepIndex + 1});
-      this.setState({secondsElapsed: 0});
+    if (activeStepDuration === secondsElapsed + 1) {
+      this.setState({
+        activeStepIndex: this.state.activeStepIndex + 1,
+        secondsElapsed: 0
+      });
+    }
+
+    if (activeStepIndex === steps.length) {
+      this.setState({isTimerActive: false});
+      clearInterval(this.interval);
+      console.log('timer stoped!');
     }
   },
 
-  startCounter: function() {
+  startTimer: function() {
+    this.setState({
+      isTimerActive: true,
+      activeStepIndex: 0
+    });
     this.interval = setInterval(this.tick, 1000);
   },
 
-  stopCounter: function() {
+  stopTimer: function() {
     clearInterval(this.interval);
-    this.setState({secondsElapsed: 0});
-  },
-
-
-  componentWillReceiveProps: function(nextProps) {
-    var recipe = this.props.recipe,
-        step = recipe.steps[this.state.activeStepIndex];
-
     this.setState({
-      activeStepIndex: nextProps.secondsElapsed >= step.seconds ?
-                 this.state.activeStepIndex + 1 :
-                 this.state.activeStepIndex
+      isTimerActive: false,
+      activeStepIndex: null,
+      secondsElapsed: 0
     });
   },
 
   render: function() {
     var steps = this.props.steps,
         activeStepIndex = this.state.activeStepIndex,
-        secondsElapsed = this.state.secondsElapsed;
+        secondsElapsed = this.state.secondsElapsed,
+        isTimerActive = this.state.isTimerActive;
 
     return (
       <div>
         {steps.map(function(step, i) {
-          var isActive = i === activeStepIndex;
+          var isActiveStep = i === activeStepIndex,
+              isCompletedStep = i < activeStepIndex;
 
           return <Step action={step.action}
-                       duration={isActive ? step.duration - secondsElapsed : step.duration}
-                       active={isActive} />;
+                       duration={isActiveStep ? step.duration - secondsElapsed : step.duration}
+                       active={isActiveStep}
+                       completed={isCompletedStep} />;
         })}
-        <button onClick={this.startCounter}>Start</button>
-        <button onClick={this.stopCounter}>Stop</button>
 
+        <button onClick={isTimerActive ? this.stopTimer : this.startTimer}>
+          {isTimerActive? 'Stop' : 'Start'}
+        </button>
       </div>
     );
   }

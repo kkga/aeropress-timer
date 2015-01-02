@@ -3,6 +3,9 @@
     "name": "Stumptown",
     "url": "http://stumptowncoffee.com/brew-guides/aeropress/",
     "inverted": true,
+    "grind": "medium",
+    "grams": 17,
+    "info": "",
     "steps":
       [
         {

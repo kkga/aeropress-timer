@@ -5,6 +5,7 @@ var Step = React.createClass({
     var action = this.props.action,
         duration = this.props.duration,
         isActive = this.props.active,
+        isCompleted = this.props.completed;
 
         stepStyle = {
           border: '1px solid skyblue'
@@ -20,7 +21,7 @@ var Step = React.createClass({
       <div style={isActive ? activeStepStyle : stepStyle}>
         <span>{action}</span>
         {' '}
-        <span>{duration}s</span>
+        <span>{isCompleted ? 0 : duration}s</span>
       </div>
     );
   }
